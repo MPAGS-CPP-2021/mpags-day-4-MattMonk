@@ -18,10 +18,10 @@ void PlayfairCipher::setKey( \
     
     // Append the alphabet
     key_ += alphabet_;
+
     // Make sure the key is upper case
-    //Taken from cppreference: https://en.cppreference.com/w/cpp/algorithm/transform
-    std::transform(key_.begin(), key_.end(), key_.begin(),
-                   [](unsigned char c) -> unsigned char { return std::toupper(c); });
+    std::transform(std::begin(key_), std::end(key_), std::begin(key_), ::toupper);
+    
     // Remove non-alpha characters
     // Change J -> I
     
