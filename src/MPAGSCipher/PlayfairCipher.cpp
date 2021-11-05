@@ -21,12 +21,39 @@ void PlayfairCipher::setKey( \
 
     // Make sure the key is upper case
     std::transform(std::begin(key_), std::end(key_), std::begin(key_), ::toupper);
-    
+
     // Remove non-alpha characters
+    auto notIsAlpha = [] (const char c)
+    {
+        return !std::isalpha(c);
+    };
+    auto rmNotAlphaIter = std::remove_if(std::begin(key_), std::end(key_), notIsAlpha);
+    key_.erase(rmNotAlphaIter, std::end(key_));
+
     // Change J -> I
-    
+    auto jToI = [] (char c)
+    {
+        if (c=='J') return 'I';
+        else return c;
+    };
+    std::transform(std::begin(key_), std::end(key_), std::begin(key_), jToI);
+
     // Remove duplicated letters
-    
+    std::string encounteredLetters{""};
+    auto rmDuplicateLam = [&] (char c)
+    {
+        auto found = encounteredLetters.find(c);
+        if (found == std::string::npos)
+        {
+            encounteredLetters += c;
+            return false;
+        }
+        else return true;
+    };
+    auto rmDuplicateIter = std::remove_if(std::begin(key_), std::end(key_), rmDuplicateLam);
+    key_.erase(rmDuplicateIter, std::end(key_));
+
+
     // Store the coords of each letter
     
     // Store the playfair cihper key map
