@@ -2,10 +2,12 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
+#include <vector>
 
 PlayfairCipher::PlayfairCipher(const std::string& key)
 {
-    key_ = key;
+    this->setKey(key);
 }
 
 void PlayfairCipher::setKey( \
@@ -15,8 +17,11 @@ void PlayfairCipher::setKey( \
     key_ = key;
     
     // Append the alphabet
-    
+    key_ += alphabet_;
     // Make sure the key is upper case
+    //Taken from cppreference: https://en.cppreference.com/w/cpp/algorithm/transform
+    std::transform(key_.begin(), key_.end(), key_.begin(),
+                   [](unsigned char c) -> unsigned char { return std::toupper(c); });
     // Remove non-alpha characters
     // Change J -> I
     
@@ -53,6 +58,6 @@ std::string PlayfairCipher::applyCipher( \
                         break;
                 }
 
-    std::cout << "Apply the Playfair cipher with input text: " << inputText << " and with cipher mode: " << mode << std::endl;
+    std::cout << "Apply the Playfair cipher with input text: " << inputText << " and with cipher mode: " << mode << " and key: " << key_ << std::endl;
     return inputText;
 }
