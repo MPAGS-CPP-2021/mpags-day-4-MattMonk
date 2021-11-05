@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <string>
 #include <vector>
+#include <map>
 
 /**
  * \file PlayfairCipher.hpp
@@ -41,11 +42,25 @@ class PlayfairCipher {
      */
     std::string applyCipher(const std::string& inputText,
                             const CipherMode cipherMode) const;
+    
+    /**
+     * \brief Convert all occurences of char 'J' in a string to 'I'
+     * 
+     * \param inputText the string to be modified such that J->I
+     */ 
+    void changeJstoIs(std::string& inputText);
 
   private:
     /// The cipher key, a string in this case
     std::string key_{0};
+    /// The alphabet to append to the key
     const std::string alphabet_{"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
+    /// The map from letter -> coordinates
+    using Char2IntPairMap = std::map<char, std::pair<int, int>>;
+    Char2IntPairMap letterToCoords_;
+    /// The map from coordinates -> letter
+    using IntPair2CharMap = std::map<std::pair<int, int>, char>;
+    IntPair2CharMap coordsToLetter_;
 };
 
 #endif
