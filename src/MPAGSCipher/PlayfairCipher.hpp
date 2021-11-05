@@ -41,7 +41,7 @@ class PlayfairCipher {
      * \return the result of applying the cipher to the input text
      */
     std::string applyCipher(const std::string& inputText,
-                            const CipherMode cipherMode) const;
+                            const CipherMode cipherMode);
     
     /**
      * \brief Convert all occurences of char 'J' in a string to 'I'
@@ -51,6 +51,10 @@ class PlayfairCipher {
     void changeJstoIs(std::string& inputText);
 
   private:
+    /// The length of the grid in 1D
+    const size_t gridLength_{5};
+    /// The size of the grid (square grid)
+    const size_t gridSize_{gridLength_*gridLength_};
     /// The cipher key, a string in this case
     std::string key_{0};
     /// The alphabet to append to the key
