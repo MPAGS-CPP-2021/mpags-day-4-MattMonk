@@ -56,7 +56,7 @@ class PlayfairCipher {
     /// The size of the grid (square grid)
     const size_t gridSize_{gridLength_*gridLength_};
     /// The cipher key, a string in this case
-    std::string key_{0};
+    std::string key_{""};
     /// The alphabet to append to the key
     const std::string alphabet_{"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
     /// The map from letter -> coordinates
