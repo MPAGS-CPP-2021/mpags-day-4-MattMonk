@@ -13,5 +13,5 @@ TEST_CASE("Caesar Cipher encryption", "[caesar]")
 TEST_CASE("Caesar Cipher decryption", "[caesar]")
 {
     PlayfairCipher cc{"playfair"};
-    REQUIRE(cc.applyCipher("KGYVRVVQGRMF", CipherMode::Decrypt) == "HELLOWORLD");
+    REQUIRE(cc.applyCipher("KGYVRVVQGRMF", CipherMode::Decrypt) == "HELXLOWORLDZ");
 }

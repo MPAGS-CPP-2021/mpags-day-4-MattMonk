@@ -75,30 +75,28 @@ void PlayfairCipher::setKey( \
     }
 
 }
-
+// Pass by value instead as we want to modify it still
 std::string PlayfairCipher::applyCipher( \
-    const std::string& inputText, \
+    std::string inputText, \
     const CipherMode cipherMode )
 {
     std::string outputText {""};
     // Change J → I
-    std::string newText = inputText;
-    //To do this, I had to make applyCipher no longer const,
-    //although I don't really understand why
-    this->changeJstoIs(newText);
+    //To do this, I had to make applyCipher no longer const
+    this->changeJstoIs(inputText);
     // If repeated chars in a digraph add an X or Q if XX
-    std::string pairedText{newText[0]};
+    std::string pairedText{inputText[0]};
     char currentChar{'x'};
-    char lastChar{newText[0]};
-    for(std::size_t i{1};i<newText.length();i++)
+    char lastChar{inputText[0]};
+    for(std::size_t i{1};i<inputText.length();i++)
     {
-        currentChar = newText[i];
-        lastChar = newText[i-1];
+        currentChar = inputText[i];
+        lastChar = inputText[i-1];
         //Only worried about digraphs having repeated letter
         //if its the second (odd) letter in the pair, except
         //if it's the last character in the string which will
         //have a Z appended if it's odd overall
-        if (i%2 != 0 && i != newText.length()-1)
+        if (i%2 != 0 && i != inputText.length()-1)
         {
             if (currentChar != lastChar)
             {
@@ -198,19 +196,4 @@ std::string PlayfairCipher::applyCipher( \
     }
     // return the text
     return outputText;
-    /*
-    std::string mode {""};
-    switch (cipherMode) {
-                    case CipherMode::Encrypt:
-                        mode += "Encrypt";
-                        break;
-                    case CipherMode::Decrypt:
-                        mode += "Decrypt";
-                        break;
-                }
-
-    std::cout << "Apply the Playfair cipher with input text: " << inputText << " and with cipher mode: " << mode << " and key: " << key_ << std::endl;
-    std::cout << "Modified text = " << pairedText << std::endl;
-    return inputText;
-    */
 }

@@ -40,7 +40,7 @@ class PlayfairCipher {
      * \param cipherMode whether to encrypt or decrypt the input text
      * \return the result of applying the cipher to the input text
      */
-    std::string applyCipher(const std::string& inputText,
+    std::string applyCipher(std::string inputText,
                             const CipherMode cipherMode);
     
     /**
