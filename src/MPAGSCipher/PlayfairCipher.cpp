@@ -107,13 +107,14 @@ std::string PlayfairCipher::applyCipher( \
                 if (currentChar != 'X')
                 {
                     pairedText += 'X';
-                    pairedText += currentChar;
+                    //pairedText += currentChar;
                 }
                 else
                 {
                     pairedText += 'Q';
-                    pairedText += currentChar;
+                    //pairedText += currentChar;
                 }
+                pairedText += currentChar;
             }
         }
         else
